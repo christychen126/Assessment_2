@@ -147,7 +147,7 @@ def top_chars(phrase):
         elif item[1] == top_char[0][1]:
             top_char.append(item)
         
-    print sorted(item[0] for item in top_char)
+    return sorted(item[0] for item in top_char)
 
 
 #####################################################################

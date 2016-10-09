@@ -181,8 +181,24 @@ def kids_game(names):
     a dictionary (with the super-fast lookup they provide) can help;
     good solutions here will definitely require a dictionary.
     """
+    new_list = [names[0]]
+    names_dict = {}
 
-    return []
+    for name in names[1:]:
+        key = name[0]
+        if key in names_dict:
+            names_dict[key].append(name)
+        else:
+            names_dict[key] = [name]
+
+    for key in names_dict:
+        next_key = new_list[-1][-1]
+
+        if next_key in names_dict and names_dict[next_key]:
+            new_list.append(names_dict[next_key][0])
+            names_dict[next_key].remove(names_dict[next_key][0])
+
+    return new_list
 
 #####################################################################
 # You can ignore everything below this.
