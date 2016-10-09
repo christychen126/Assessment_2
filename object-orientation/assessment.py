@@ -44,3 +44,43 @@ Part 1: Discussion
 
 # Parts 2 through 5:
 # Create your classes and class methods
+
+
+class Student(object):
+
+    def __init__(self, first_name, last_name, address):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.address = address
+
+
+class Question(object):
+
+    def __init__(self, question, correct_answer):
+        self.question = question
+        self.correct_answer = correct_answer
+
+    def ask_and_evaluate(self, question, correct_answer):
+        user_input = raw_input(question)
+        if user_input == correct_answer:
+            return True
+        else:
+            return False
+
+
+class Exam(object):
+
+    def __init__(self, name):
+        self.name = name       
+        self.questions = []
+        
+    def add_question(self, question, correct_answer):
+        self.question = question
+        self.correct_answer = correct_answer
+
+
+
+
+
+
+
