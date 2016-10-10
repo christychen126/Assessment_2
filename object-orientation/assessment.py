@@ -47,20 +47,28 @@ Part 1: Discussion
 
 
 class Student(object):
+    """A class of students information"""
 
     def __init__(self, first_name, last_name, address):
+        """Set instance attibues that with students information"""
+
         self.first_name = first_name
         self.last_name = last_name
         self.address = address
 
 
 class Question(object):
+    """A class of questions"""
 
     def __init__(self, question, correct_answer):
+        """set instance attributes with question and correct_answer"""
+
         self.question = question
         self.correct_answer = correct_answer
 
     def ask_and_evaluate(self):
+        """prompt user for the answer and check correctness"""
+
         user_input = raw_input(self.question)
         if user_input == self.correct_answer:
             return True
@@ -69,16 +77,23 @@ class Question(object):
 
 
 class Exam(object):
+    """A class hold information about exam"""
 
     def __init__(self, name):
+        """set attribues for the exam info"""
+
         self.name = name       
         self.questions = []
         
     def add_question(self, question, correct_answer):
+        """add questions to the exam"""
+
         my_question = Question(question, correct_answer)
         self.questions.append(my_question)
 
     def administer(self):
+        """add score if the input of answer is corret"""
+
         score = 0
         for question in self.questions:
             if question.ask_and_evaluate():
@@ -86,10 +101,14 @@ class Exam(object):
         return score
 
 def take_test(exam, student):
+    """store the score of a student"""
+
     student.score = exam.administer()
 
 
 def example():
+    """make an example of an exam"""
+
     exam = Exam('Fluffy')
     exam.add_question("Are you a dog?", "Yes I am!")
     exam.add_question("Are you hungry?", "Kind of.")
@@ -99,8 +118,11 @@ def example():
 
 
 class Quiz(Exam):
+    """A subclass of Exam class"""
 
     def administer(self):
+        """modify the scoring system"""
+
         if super(Quiz, self).administer() / len(self.questions) >= 0.5:
             return True
         else: 
