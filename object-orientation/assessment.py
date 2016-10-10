@@ -60,9 +60,9 @@ class Question(object):
         self.question = question
         self.correct_answer = correct_answer
 
-    def ask_and_evaluate(self, question, correct_answer):
-        user_input = raw_input(question)
-        if user_input == correct_answer:
+    def ask_and_evaluate(self):
+        user_input = raw_input(self.question)
+        if user_input == self.correct_answer:
             return True
         else:
             return False
@@ -75,12 +75,31 @@ class Exam(object):
         self.questions = []
         
     def add_question(self, question, correct_answer):
-        self.question = question
-        self.correct_answer = correct_answer
+        my_question = Question(question, correct_answer)
+        self.questions.append(my_question)
+
+    def administer(self):
+        score = 0
+        for question in self.questions:
+            if question.ask_and_evaluate():
+                score += 1
+        return score
+
+def take_test(exam, student):
+    student.score = exam.administer()
+
+
+def example():
+    exam = Exam('Fluffy')
+    exam.add_question("Are you a dog?", "Yes I am!")
+    exam.add_question("Are you hungry?", "Kind of.")
+    student = Student("Agnes", "Potter", "The closet")
+    take_test(exam, student)
 
 
 
-
+class Quiz(Exam):
+    
 
 
 
