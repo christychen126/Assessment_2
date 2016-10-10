@@ -101,7 +101,7 @@ def example():
 class Quiz(Exam):
 
     def administer(self):
-        if super(Quiz, self).administer() / len(self.questions) > 0.5:
+        if super(Quiz, self).administer() / len(self.questions) >= 0.5:
             return True
         else: 
             return False
