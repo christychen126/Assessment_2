@@ -8,9 +8,13 @@ Part 1: Discussion
     2. Encapsulation: 
         Objects in the same class will have similar properties, and methods are close 
         to the data(objects) that they can be called on.
-    3. Polymorphism: For children classes that inherit from same parent class, 
-        there are some commons in the children classes. They can have same attributes 
-        or can call same methods which are defined in their parent class. 
+    3. Polymorphism: Parent class has the ability to provide a general interface or 
+    methods for differing underlying ubclass. 
+
+    (it's more related to inheritance)
+    #For children classes that inherit from same parent class, 
+    # there are some commons in the children classes. They can have same attributes 
+    # or can call same methods which are defined in their parent class. 
 
 2. What is a class?
     A class can group functions(methods) and attributes which can be applied to 
@@ -70,10 +74,8 @@ class Question(object):
         """prompt user for the answer and check correctness"""
 
         user_input = raw_input(self.question)
-        if user_input == self.correct_answer:
-            return True
-        else:
-            return False
+        return user_input == self.correct_answer
+
 
 
 class Exam(object):
@@ -123,10 +125,7 @@ class Quiz(Exam):
     def administer(self):
         """modify the scoring system"""
 
-        if super(Quiz, self).administer() / len(self.questions) >= 0.5:
-            return True
-        else: 
-            return False
+        return float(super(Quiz, self).administer()) / len(self.questions) >= 0.5
 
 
 
