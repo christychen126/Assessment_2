@@ -28,10 +28,10 @@ def count_words(phrase):
         >>> print_dict(count_words("Porcupine see, porcupine do."))
         {'Porcupine': 1, 'do.': 1, 'porcupine': 1, 'see,': 1}
     """
-    count_word = {}
+    count_words = {}
     for word in phrase.split():
-        count_word[word] = count_word.get(word, 0) + 1
-    return count_word
+        count_words[word] = count_words.get(word, 0) + 1
+    return count_words
 
 
 def get_melon_price(melon_name):
@@ -53,13 +53,18 @@ def get_melon_price(melon_name):
         >>> get_melon_price('Tomato')
         'No price found'
     """
-    melon_dict = {"Watermelon": 2.95, "Cantaloupe": 2.50, "Musk": 3.25, "Christmas": 14.25}
+    melon_dict = {
+    "Watermelon": 2.95,
+     "Cantaloupe": 2.50,
+      "Musk": 3.25,
+    "Christmas": 14.25
+    }
 
-    if melon_dict.get(melon_name):
-        return melon_dict[melon_name]
-    else:
-        return "No price found"
-
+    # if melon_dict.get(melon_name):
+    #     return melon_dict[melon_name]
+    # else:
+    #     return "No price found"
+    return melon_dict.get(melon_name, "No price found")
 
 
 
@@ -78,10 +83,12 @@ def word_length_sorted(words):
         >>> word_length_sorted(["ok", "an", "apple", "a", "day"])
         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
     """
-    word_length_dict = {len(word): [] for word in words}
+    word_length_dict = {}
+    #len(word): [] for word in words - the original dict comprehension
 
     for word in words:
-        word_length_dict[len(word)].append(word)
+        word_length_dict.setdefault(len(word), []).append(word)
+
     for key in word_length_dict:
         word_length_dict[key] = sorted(word_length_dict[key])
 
@@ -126,20 +133,28 @@ def translate_to_pirate_talk(phrase):
         >>> translate_to_pirate_talk("my student is not a man!")
         'me swabbie be not a man!'
     """
-    eng_pirate_dict = { "sir": "matey", "hotel": "fleabag inn",
-     "student": "swabbie", "man": "matey", "professor": "foul blaggart", 
-     "restaurant": "galley", "your" : "yer", "excuse": "arr", 
-     "students" : "swabbies", "are": "be", "restroom": "head", 
-     "my": "me", "is": "be"}
+    eng_pirate_dict = { "sir": "matey",
+    "hotel": "fleabag inn",
+    "student": "swabbie",
+    "man": "matey",
+    "professor": "foul blaggart", 
+    "restaurant": "galley",
+    "your": "yer",
+    "excuse": "arr", 
+    "students" : "swabbies",
+    "are": "be",
+    "restroom": "head", 
+     "my": "me",
+      "is": "be"}
 
     words = phrase.split()
-    new_word_list = []
+    new_word_list = [eng_pirate_dict.get(word, word) for word in words]
 
-    for word in words:
-        if eng_pirate_dict.get(word):
-            new_word_list.append(eng_pirate_dict[word])
-        else: 
-            new_word_list.append(word)
+    # for word in words:
+    #     if eng_pirate_dict.get(word):
+    #         new_word_list.append(eng_pirate_dict[word])
+    #     else: 
+    #         new_word_list.append(word)
 
     return (" ").join(new_word_list)
 
@@ -186,10 +201,14 @@ def kids_game(names):
 
     for name in names[1:]:
         key = name[0]
-        if key in names_dict:
-            names_dict[key].append(name)
-        else:
-            names_dict[key] = [name]
+        names_dict.setdefault(key, []).append(name)
+
+    # for name in names[1:]:
+    #     key = name[0]
+    #     if key in names_dict:
+    #         names_dict[key].append(name)
+    #     else:
+    #         names_dict[key] = [name]
 
     for key in names_dict:
         next_key = new_list[-1][-1]
